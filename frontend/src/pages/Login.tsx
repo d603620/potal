@@ -33,7 +33,7 @@ const Login: React.FC = () => {
     setSubmitting(true);
 
     try {
-      const resp = await fetch('Sauth/login', {
+      const resp = await fetch('auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
