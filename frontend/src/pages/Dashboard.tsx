@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
       <section className="bg-[var(--dnp-blue)] text-[var(--dnp-text-light)] rounded-2xl shadow-lg px-6 py-5 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide opacity-80">
-            DNP Internal Portal
+            Integrated Manufacturing Innovation Laboratory Internal Portal
           </p>
           <h1 className="text-2xl md:text-3xl font-bold mt-1">
             Dashboard
