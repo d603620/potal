@@ -1,0 +1,291 @@
+/* =====================================================================
+   Global Layout
+   ===================================================================== */
+
+.portal-main {
+  flex: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: calc(var(--grid) * 4);
+}
+
+/* Page container */
+.dnp-page {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--grid) * 4);
+}
+
+/* Section title */
+.dnp-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 var(--grid);
+}
+
+/* Card container */
+.dnp-card {
+  padding: calc(var(--grid) * 4);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* Label */
+.dnp-field-label {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+/* Form input */
+.dnp-text-input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.dnp-btn {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.dnp-btn-primary {
+  background-color: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.dnp-btn-outline {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+.dnp-btn-subtle {
+  background-color: var(--surface);
+  color: var(--text-sub);
+  border-color: var(--border);
+}
+
+/* Eyebrow */
+.dnp-page-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--blue-light);
+  margin-bottom: var(--grid);
+}
+
+/* Subtitle */
+.dnp-page-subtitle {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: var(--grid);
+}
+
+/* Bubbles used across pages */
+.bubble {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  margin-bottom: calc(var(--grid) * 2);
+}
+
+.bubble.user {
+  background-color: #e7f3ff;
+}
+
+.bubble.ai {
+  background-color: #f3f3f7;
+}
+
+.bubble-role {
+  font-size: 11px;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+/* =====================================================================
+   KPI Analyzer Styles (そのまま維持)
+   ===================================================================== */
+
+/* KPI Hero Card */
+.kpi-hero {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: calc(var(--grid) * 4);
+}
+
+.kpi-hero-title {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.kpi-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--grid) * 4);
+}
+
+/* ===== 教育資料デモ（EduDemo）専用スタイル ===== */
+
+/* KPIページの上段カードと同じポジションに来るヒーローカード */
+.edu-hero-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: #fff;
+}
+
+.edu-hero-left .dnp-page-title,
+.edu-hero-left .dnp-page-subtitle {
+  color: #fff;
+}
+
+.edu-hero-right {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: right;
+  max-width: 260px;
+}
+
+/* 下段 2 カラム（左チャット / 右パネル） */
+.edu-layout-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+/* 左カード（チャット） */
+.edu-chat-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+}
+
+.edu-placeholder {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-bottom: 8px;
+}
+
+.edu-chat-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: #fafbfd;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: calc(var(--grid) * 3);
+}
+
+/* 既存 bubble を少しだけ調整 */
+.edu-bubble {
+  margin-bottom: calc(var(--grid) * 2);
+}
+
+/* スピナー（資料作成中 / 完了） */
+@keyframes edu-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.edu-spinner {
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px dashed var(--border);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-sub);
+  background: #f3f6ff;
+}
+
+.edu-spinner__icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 2px solid #cbd5f5;
+  border-top-color: var(--blue);
+  animation: edu-spin 1s linear infinite;
+}
+
+.edu-spinner--done .edu-spinner__icon {
+  animation: none;
+  border-color: #22c55e;
+  border-top-color: #22c55e;
+}
+
+.edu-spinner__label {
+  white-space: nowrap;
+}
+
+/* ファイルリンク（PPTX / DOCX のボタン風） */
+.edu-file-link a {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-decoration: none;
+  background: #e7f0ff;
+  color: var(--blue-dark);
+  border: 1px solid var(--border);
+}
+
+/* 右カード（制御パネル） */
+.edu-side-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-error {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #ffe5e5;
+  color: #b30000;
+  border: 1px solid #ffb3b3;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.edu-file-button {
+  background: none;
+  border: none;
+  color: #005bac;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+.edu-file-button:hover {
+  text-decoration: underline;
+}
+
+/* ===== Oracle NLQ Hero ===== */
+.oracle-nlq-hero {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: #fff;
+}
+
+.oracle-nlq-hero .dnp-page-eyebrow,
+.oracle-nlq-hero .dnp-section-title,
+.oracle-nlq-hero .dnp-page-subtitle {
+  color: #fff;
+}

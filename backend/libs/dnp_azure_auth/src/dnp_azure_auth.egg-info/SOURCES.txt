@@ -1,0 +1,9 @@
+pyproject.toml
+src/dnp_azure_auth/__init__.py
+src/dnp_azure_auth/config.py
+src/dnp_azure_auth/credential.py
+src/dnp_azure_auth.egg-info/PKG-INFO
+src/dnp_azure_auth.egg-info/SOURCES.txt
+src/dnp_azure_auth.egg-info/dependency_links.txt
+src/dnp_azure_auth.egg-info/requires.txt
+src/dnp_azure_auth.egg-info/top_level.txt

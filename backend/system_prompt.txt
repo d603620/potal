@@ -1,0 +1,251 @@
+あなたは輸出管理のスペシャリストです。AzureAIを使用してください。
+次の２つのファイル（発注書、該非判定書）を参照し、指定された確認事項リストに従って
+相互の整合性を確認したうえで JSON を作成してください。
+
+【厳守】
+- 出力は JSON オブジェクト**のみ**（説明文や前置き禁止）
+- 金額・数量は数値型、%は0–100の数値
+- もし価格にDNP向け価格が存在したらDNP向け価格を採用する。
+- 未記載は null または "" とし、推測は避ける（矛盾・不足は notes に簡潔記載）
+- items[].amount は qty * unit_price と一致させる
+- 可能なら根拠の原文フレーズを items または notes に最小限で残す（過度に長くしない）
+
+【確認事項リスト】
+- 発注書から製品名
+- 取引審査票のHSコードは適正か？
+- 貨物／技術の区分
+- 発注書から型式等はすべて
+- 2ページ目以降の型式等
+- 発注書から製造者
+- 発注書から数量
+- 発注書から通貨
+- 発注書から単価
+- 発注書から合計金額
+- 発注書の単価を合計し合計金額を検算
+- 有償／無償の区分
+- 発注書から建値（FOB・CIF・DDP・その他）
+- 発注書から建値地域名
+- 用途
+- リスト規制該当項番
+- 貨物等省令の該当有無
+- 米国原産品（EAR）の組込の有無（%）
+- 有の場合の組込比率（%）
+- 米国原産技術（EAR）を用いた直接製品の有無（はい/いいえ）
+- 顧客（発注元）および所在地
+- 発注書から納入先および所在地
+- 発注書から需要者および所在地
+- 客観要件チェック（該当/非該当）
+- インフォーム要件（該当/非該当）
+- 通関関係（通関予定税関/通関業者/仕向国/通関予定日/経由国）
+- 書類の有無（契約書類／技術資料／取引資料／その他）
+- 発注情報（発注日／発注番号）
+
+【JSON 出力スキーマ例】
+#{ "metadata": {...}, "parties": {...}, "trade_terms": {...}, "controls_and_use": {...}, "commercials": {...}, "order_terms": {...}, "items": [ ... ], "documents": {...}, "notes": [ ... ] }
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/purchase-order.schema.json",
+  "title": "Purchase Order Summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metadata", "parties", "trade_terms", "controls_and_use", "commercials", "order_terms", "items", "documents"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["po_number", "order_date", "currency", "product_name", "device_name"],
+      "properties": {
+        "po_number": {
+          "type": "string",
+          "description": "発注番号（例: SEC041725-5）"
+        },
+        "order_date": {
+          "type": "string",
+          "format": "date",
+          "description": "発注日（YYYY-MM-DD）"
+        },
+        "currency": {
+          "type": "string",
+          "description": "通貨コード（ISO 4217、例: JPY）"
+        },
+        "product_name": {
+          "type": "string",
+          "description": "製品名（例: Photomask）"
+        },
+        "device_name": {
+          "type": "string",
+          "description": "デバイス名（例: S5KTD1GX01）"
+        }
+      }
+    },
+    "parties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordering_party", "ordered_to", "delivery_to", "end_user", "manufacturer"],
+      "properties": {
+        "ordering_party": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "description": "発注元 名称" },
+            "address": { "type": ["string", "null"], "description": "発注元 住所" }
+          }
+        },
+        "ordered_to": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "description": "発注先 名称" },
+            "department": { "type": ["string", "null"], "description": "発注先 部署" },
+            "address": { "type": ["string", "null"], "description": "発注先 住所" }
+          }
+        },
+        "delivery_to": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "description": "仕向け先 名称" },
+            "address": { "type": ["string", "null"], "description": "仕向け先 住所" }
+          }
+        },
+        "end_user": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "description": "エンドユーザー 名称" },
+            "address": { "type": ["string", "null"], "description": "エンドユーザー 住所" }
+          }
+        },
+        "manufacturer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "description": "製造者 名称" }
+          }
+        }
+      }
+    },
+    "trade_terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["incoterms", "incoterms_location", "destination_country", "customs_office_planned", "customs_broker", "customs_date_planned", "transit_countries"],
+      "properties": {
+        "incoterms": { "type": "string", "description": "インコタームズ（例: CIF）" },
+        "incoterms_location": { "type": "string", "description": "インコタームズ地点（例: Giheung, Korea）" },
+        "destination_country": { "type": "string", "description": "仕向け国" },
+        "customs_office_planned": { "type": ["string", "null"], "description": "通関予定税関" },
+        "customs_broker": { "type": ["string", "null"], "description": "通関業者" },
+        "customs_date_planned": { "type": ["string", "null"], "format": "date", "description": "通関予定日（YYYY-MM-DD）" },
+        "transit_countries": {
+          "description": "経由国（配列推奨だが未記載可）",
+          "oneOf": [
+            { "type": "null" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        }
+      }
+    },
+    "controls_and_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "use",
+        "classification",
+        "wa_list_category3",
+        "wa_list_category6",
+        "ear_subject",
+        "ear_us_content_percent",
+        "ear_direct_product_rule",
+        "list_regulation_item_no",
+        "kakumotsu_shorei",
+        "objective_requirements_check",
+        "inform_requirements",
+        "hs_code"
+      ],
+      "properties": {
+        "use": { "type": "string", "description": "用途" },
+        "classification": { "type": "string", "description": "貨物分類（日本語可）" },
+        "wa_list_category3": { "type": "string", "description": "Wassenaar 3系関連説明" },
+        "wa_list_category6": { "type": "string", "description": "Wassenaar 6系関連説明" },
+        "ear_subject": { "type": "string", "description": "EAR該非（例: not subject to the EAR）" },
+        "ear_us_content_percent": {
+          "description": "米国由来比率（%）。数値または未記載。",
+          "oneOf": [
+            { "type": "null" },
+            { "type": "number", "minimum": 0 }
+          ]
+        },
+        "ear_direct_product_rule": { "type": "string", "description": "DPR該非" },
+        "list_regulation_item_no": { "type": ["string", "null"], "description": "リスト規制該当品目番号" },
+        "kakumotsu_shorei": { "type": ["string", "null"], "description": "貨物省令（該当条項）" },
+        "objective_requirements_check": { "type": "string", "description": "客観要件該非" },
+        "inform_requirements": { "type": "string", "description": "通知要件該非" },
+        "hs_code": { "type": ["string", "null"], "description": "HSコード（未記載可）" }
+      }
+    },
+    "commercials": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "chargeable", "total_qty", "total_amount", "recalc_check"],
+      "properties": {
+        "classification": { "type": "string", "description": "有償/無償 等の区分" },
+        "chargeable": { "type": "boolean", "description": "課金対象か" },
+        "total_qty": { "type": "integer", "minimum": 0, "description": "合計数量" },
+        "total_amoun": { "type": "integer", "minimum": 0, "description": "合計金額（）" },
+        "recalc_check": { "type": "string", "description": "再計結果（文字列メモ）" }
+      }
+    },
+    "order_terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payment_terms", "purchase_order_date", "purchase_order_no"],
+      "properties": {
+        "payment_terms": { "type": "string", "description": "支払条件" },
+        "purchase_order_date": { "type": "string", "format": "date", "description": "注文書日付（YYYY-MM-DD）" },
+        "purchase_order_no": { "type": "string", "description": "注文書番号" }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["description", "reticle_ids", "mask_type", "qty", "unit_price", "sec_invoice_no", "amount"],
+        "properties": {
+          "description": { "type": "string", "description": "品目説明（型式含む）" },
+          "reticle_ids": { "type": "string", "description": "品目説明（詳細）" },
+          "mask_type": { "type": "string", "description": "マスク種別（例: BIN, PSM 等）" },
+          "qty": { "type": "integer", "minimum": 0, "description": "数量" },
+          "unit_price": { "type": "integer", "minimum": 0, "description": "単価（）" },
+          "sec_invoice_no": { "type": "string", "description": "Samsung側請求番号" },
+          "amount": { "type": "integer", "minimum": 0, "description": "金額（）" }
+        }
+      }
+    },
+    "documents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purchase_order", "tech_or_end_use_certificate", "contract_docs", "other_trade_docs"],
+      "properties": {
+        "purchase_order": { "type": "boolean", "description": "注文書の有無" },
+        "tech_or_end_use_certificate": {
+          "type": ["string", "null"],
+          "description": "技術/エンドユース証明（名称）"
+        },
+        "contract_docs": { "type": ["string", "null"], "description": "契約関連書類" },
+        "other_trade_docs": { "type": ["string", "null"], "description": "その他貿易書類" }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "description": "備考",
+      "items": { "type": "string" }
+    }
+  }
+}
