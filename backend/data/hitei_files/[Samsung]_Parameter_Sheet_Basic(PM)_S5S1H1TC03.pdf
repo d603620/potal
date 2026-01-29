@@ -1,0 +1,55 @@
+ 
+ 
+Rev.2024.12.31 
+[ COMPANY LETTERHEAD ] 
+ 
+To: Dai Nippon Printing Co., Ltd. 
+1-1, Ichigaya-Kagacho 1-Chome 
+Shinjuku-Ku, Tokyo 162-8001, Japan 
+ 
+CONTROLLED STATUS OF INTEGRATED CIRCUIT (IC) DESIGN DATA 
+and END USE CERTIFICATE 
+ 
+Design Rule (Technology Node, Half Pitch) :                28nm                      
+End Use of IC manufactured by the above Data :           Consumer product        
+Function of IC : □Memory  □Logic  □Optical Sensor  ■Others(                              ) 
+Photomask* Device name for the above IC :                  S5S1H1TC03                
+* The term “Photomask” in this certificate includes Imprint lithography templates. 
+ 
+1. Certificate for Dual-Use List of Wassenaar Arrangement (WA) 
+ 
+We hereby certify that the above IC design data we provided to DNP is,  
+under Category 3 of Dual-Use List of WA, 
+□ for the production of the IC specified by 3.A.1. 
+■ not for the production of the IC specified by 3.A.1. 
+(If the IC design data does not meet any specific subcategories of 3.A.1., 
+please tick "not for the production of the IC specified by 3.A.1.".) 
+ 
+We hereby certify that the above IC design data we provided to DNP is,  
+under Category 6 of Dual-Use List of WA, 
+□ for the production of the optical sensors specified by 6.A.2.a.1.b. or 6.A.2.a.1.d. 
+■ not for the production of the optical sensors specified by 6.A.2.a.1.b. or 6.A.2.a.1.d. 
+ 
+2. End-use Certificate 
+ 
+■ We hereby certify that we will use, export, re-export, sell, or transfer Photomask manufactured 
+by Dai Nippon Printing Co., Ltd. for civil purpose only. 
+ 
+3. Certificate for the Export Administration Regulations (EAR) 
+ 
+We hereby certify that the IC design data which we provided to DNP is, 
+□ subject to the EAR (ECCN :              or □ EAR99) 
+■ not subject to the EAR  
+ 
+< If the above IC design data is subject to the EAR, please check the appropriate box below.> 
+□ subject to §744.23 “Supercomputer”, “advanced-node integrated circuits” and semiconductor  
+manufacturing equipment end use controls. 
+□ not subject to §744.23 “Supercomputer”, “advanced-node integrated circuits” and  
+semiconductor manufacturing equipment end use controls. 
+□ subject to the other rules of EAR (                                         ) 
+ 
+Date:     2025/04/17   
+Name:         Nam Suk Kim        
+Title:           General Manager               
+[Company Name]  Samsung Electronics Co., Ltd. 
+[Company Address]   SAN #24 Nongseo-dong, Giheung-gu, Yongin-city, Gyeonggi-do, Korea 446-711 
