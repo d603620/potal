@@ -6,6 +6,9 @@ __pycache__/
 .venv/
 venv/
 .env
+*.csv
+data/*.csv
+.data/
 
 # Node / frontend
 frontend/node_modules/
