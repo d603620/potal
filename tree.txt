@@ -120,7 +120,6 @@
 │   │               ├── dependency_links.txt
 │   │               ├── requires.txt
 │   │               └── top_level.txt
-│   ├── main.py
 │   ├── requirements.txt
 │   └── system_prompt.txt
 ├── frontend
@@ -5860,4 +5859,4 @@
 │   └── vite.config.js
 └── tree.txt
 
-627 directories, 5234 files
+627 directories, 5233 files
