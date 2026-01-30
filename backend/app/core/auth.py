@@ -7,7 +7,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # ★今はダミー。実際はDBから社員情報を取得する想定
 _dummy_user = {
   "employee_id": "Deng1",
-  "hashed_password": pwd_context.hash("dengdeng123!!"),
+  "hashed_password": pwd_context.hash("demodemo"),
   "name": "革新研データエンジニアリング開発部-Giiji",
 }
 
