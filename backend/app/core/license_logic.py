@@ -10,7 +10,7 @@ from .license_models import (
     LicenseJudgeResult,
 )
 from .azure_openai_client import call_chat
-from app.services.license_fetch_service import fetch_license_text_from_web  # ★追加
+from app.core.license_fetch_service import fetch_license_text_from_web  # ★追加
 
 def summarize_license_logic(req: LicenseSummaryRequest) -> LicenseSummaryResponse:
     """

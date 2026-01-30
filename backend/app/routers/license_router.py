@@ -10,7 +10,7 @@ from app.core.license_logic import (
     summarize_license_logic,
     judge_license_logic,
 )
-from app.services.license_fetch_service import fetch_license_text_from_web
+from app.core.license_fetch_service import fetch_license_text_from_web
 
 router = APIRouter(prefix="/license", tags=["license"])
 
