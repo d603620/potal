@@ -28,7 +28,10 @@ from app.routers import scenario as scenario_router
 from app.routers import data as data_router
 from app.routers import oracle_nlq  # 追加
 from app.routers import oracle_diag
-from app.routers import auth 
+from app.routers import auth
+from app.routers import clothing
+from app.routers import weather as weather_router
+ 
 
 from app.core.license_models import (
     LicenseSummaryRequest,
@@ -95,6 +98,10 @@ if oracle_nlq:
     app.include_router(oracle_nlq.router, prefix="/api", tags=["oracle-nlq"])  # 追加
 if oracle_diag:
     app.include_router(oracle_diag.router, prefix="/api", tags=["oracle-diag"])
+if clothing:
+    app.include_router(clothing.router, prefix="/api", tags=["clothing"])
+if weather_router:
+    app.include_router(weather_router.router, prefix="/api", tags=["weather"])
     
 
 # --- Health ---

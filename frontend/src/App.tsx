@@ -58,6 +58,9 @@ function App() {
             <Link to="/oracle-nlq" className="hover:bg-white/20 rounded-full px-3 py-1">
               Oracle NLQ
             </Link>
+            <Link to="/clothing" className="hover:bg-white/20 rounded-full px-3 py-1">
+              お天気服装アドバイス
+            </Link>
           </nav>
 
 

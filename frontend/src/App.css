@@ -289,3 +289,45 @@
 .oracle-nlq-hero .dnp-page-subtitle {
   color: #fff;
 }
+
+/* ClothingPage 調整 */
+.clothing-page {
+  max-width: 980px;              /* 横に広すぎ問題を解消 */
+  margin: 0 auto;
+}
+
+/* タイトルが青背景に埋もれるのを防ぐ */
+.clothing-hero {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: #fff;
+  border: none;
+}
+
+.clothing-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* 入力行の高さを揃える */
+.clothing-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.clothing-row .dnp-text-input {
+  height: 38px;
+}
+
+.clothing-row .btn {
+  height: 38px;
+  white-space: nowrap;
+}
+
+/* Subtitle */
+.clothing-subtitle {
+  font-size: 13px;
+  color: #fff;
+  margin-top: var(--grid);
+}

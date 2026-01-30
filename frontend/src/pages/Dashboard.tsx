@@ -59,6 +59,12 @@ const menuItems: MenuItem[] = [
     tone: "solid",  
   },
   {
+  title: "出張お天気アドバイス",
+  description: "天気情報から今日の服装を提案します（Markdown表示）。",
+  link: "/clothing",
+  tone: "solid",
+  },
+  {
     title: "ログイン画面へ",
     description: "ログイン画面に移動します。",
     link: "/login",

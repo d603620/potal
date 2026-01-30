@@ -83,3 +83,28 @@ def call_chat(system_prompt: str, user_prompt: str) -> str:
         ],
     )
     return resp.choices[0].message.content or ""
+
+from typing import Optional
+
+def call_chat_text(
+    system_prompt: str,
+    user_prompt: str,
+    #*,
+    #temperature: float = 0.2,
+    #max_tokens: int = 600,
+) -> str:
+    """
+    テキスト（Markdown等）を返す用途。response_format を指定しない。
+    """
+    client = _get_client()
+    resp = client.chat.completions.create(
+        model=_cfg.deployment,
+        #temperature=temperature,
+        #max_tokens=max_tokens,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    )
+    return resp.choices[0].message.content or ""
+    

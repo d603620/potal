@@ -17,6 +17,7 @@ import KpiAnalyzerPage from "./pages/KpiAnalyzerPage";
 import EduDemo from "./pages/EduDemo";
 import LicenseCheckerPage from "./pages/LicenseCheckerPage";
 import OracleNlqPage from "./pages/OracleNlqPage";
+import ClothingPage from "./pages/ClothingPage";
 
 import "./index.css";
 import "./App.css";
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="edu-demo" element={<EduDemo />} />
           <Route path="license-checker" element={<LicenseCheckerPage />} />
           <Route path="oracle-nlq" element={<OracleNlqPage />} />
+          <Route path="clothing" element={<ClothingPage />} />
         </Route>
 
         {/* ログインだけは独立 */}
